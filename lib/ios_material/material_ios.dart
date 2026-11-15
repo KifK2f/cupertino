@@ -11,9 +11,9 @@ class MaterialIos extends StatelessWidget {
       title: "Mon app version iOS",
       theme: CupertinoThemeData(
         brightness: Brightness.light,
-        primaryColor: Colors.red,
-        primaryContrastingColor: Colors.blue,
-        barBackgroundColor: Colors.blue,
+        // brightness: Brightness.dark,
+        // primaryColor: Colors.lightBlue,
+        // primaryContrastingColor: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
       home: IosPageScaffold(),
