@@ -31,11 +31,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PlatformType platform = type();
-    if (platform == PlatformType.iOS){
-      return const MaterialIos();
-    } else {
-      return const MyMaterialAndroid();
-    }
+  return MaterialIos();
+
+  //On mets en commentaire car je suis sur Android mais je veux quand même voir le rendu
+  //   final PlatformType platform = type();
+  //   if (platform == PlatformType.iOS){
+  //     return const MaterialIos();
+  //   } else {
+  //     return const MyMaterialAndroid();
+  //   }
   }
 }
