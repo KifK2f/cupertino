@@ -1,3 +1,4 @@
+import 'package:cupertino/ios_material/ios_interactifs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class _IOSPageScaffoldState extends State<IosPageScaffold> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle:  Text("Application iOS"),
+        automaticBackgroundVisibility: false,
       ),
       // navigationBar: CupertinoNavigationBar(
       //   middle:  Text("iOS Baby"),
@@ -49,9 +51,10 @@ class _IOSPageScaffoldState extends State<IosPageScaffold> {
               CupertinoButton(
                 // pressedOpacity: 0.8,
                 // color: CupertinoColors.systemTeal,
-                  child: const Text("Cupertino button simple"),
+                  child: const Text("Apprendre les interactifs "),
                   onPressed: () {
-          
+                      final CupertinoPageRoute route = CupertinoPageRoute(builder: ((context) => const IosInteractif()));
+                      Navigator.push(context, route);
                   }
               ),
               CupertinoButton.filled(
