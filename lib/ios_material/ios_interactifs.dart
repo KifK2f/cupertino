@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class IosInteractif extends StatefulWidget {
   const IosInteractif({super.key});
@@ -18,6 +19,13 @@ class _InteractifState extends State<IosInteractif> {
   bool isOn = false;
   late TextEditingController _controller;
   String _name = "";
+  final Map<String, bool> _options = {
+      "Banane" : false,
+      "Fraise" : false,
+      "Pêche" : false,
+  };
+
+  String? _groupValue;
 
   //méthods for updates
   void _updateSlider(double newValue){
@@ -35,6 +43,12 @@ class _InteractifState extends State<IosInteractif> {
   void _updateName(){
     setState(() {
       _name = _controller.text;
+    });
+  }
+
+  void _onValueChanged(String? string){
+    setState(() {
+      _groupValue = string;
     });
   }
 
@@ -92,9 +106,68 @@ class _InteractifState extends State<IosInteractif> {
                   onSubmitted: ((_) => _updateName()), //POur valider avec l'appui sur le bouton du clavier aussi
                 ),
                 Text("Bienvenue : $_name"),
+                const SizedBox(height: 24,),
+                const Text("Les Checkbox"),
+                Card(
+                  margin: const EdgeInsets.all(16),
+                  child: Column(
+                    children: _options.keys.map((key) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(key),
+                              const SizedBox(width: 32,),
+                              CupertinoCheckbox(value: _options[key], onChanged: (newValue){
+                                setState(() {
+                                  _options[key] = newValue ?? false;
+                                });
+                              }),
+                            ],
+                          );
+                    }).toList(),
+                  ),
+                ),
+                const SizedBox(height: 24,),
+                const Text("Radio: Mon animal préféré"),
+                Column(
+                  children: [
+                    RadioGroup<String>(
+                      groupValue: _groupValue,
+                      onChanged: _onValueChanged,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          radio("Chat"),
+                          radio("Chien"),
+                          radio("Canard"),
+                        ],
+                      ),
+                    )],
+                ),
+                Divider()
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget radio(String value){
+    return Container(
+      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey3,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      width: 250,
+      height: 64,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(value),
+          CupertinoRadio<String>(value: value),
         ],
       ),
     );
