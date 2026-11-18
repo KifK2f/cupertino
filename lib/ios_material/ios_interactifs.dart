@@ -27,6 +27,13 @@ class _InteractifState extends State<IosInteractif> {
 
   String? _groupValue;
 
+  final Map<int, Widget> _segments = {
+    0: const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text("Uno"),),
+    1: const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text("Dos"),),
+    3: const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text("Tres"),)
+  };
+  int _currentSegment = 0;
+
   //méthods for updates
   void _updateSlider(double newValue){
     setState(() {
@@ -144,7 +151,19 @@ class _InteractifState extends State<IosInteractif> {
                       ),
                     )],
                 ),
-                Divider()
+                Divider(),
+                CupertinoSegmentedControl<int>(
+                    children: _segments,
+                    groupValue: _currentSegment,
+                    onValueChanged: (s){
+                      setState(() {
+                        _currentSegment = s;
+                      });
+                    },
+                  selectedColor: CupertinoColors.systemPurple,
+                  borderColor: CupertinoColors.darkBackgroundGray,
+                  unselectedColor: CupertinoColors.systemMint,
+                ),
               ],
             ),
           )
