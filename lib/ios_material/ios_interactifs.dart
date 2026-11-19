@@ -34,6 +34,10 @@ class _InteractifState extends State<IosInteractif> {
   };
   int _currentSegment = 0;
 
+  bool isAnimating = false;
+  Color _circular = CupertinoColors.systemTeal;
+
+
   //méthods for updates
   void _updateSlider(double newValue){
     setState(() {
@@ -77,11 +81,39 @@ class _InteractifState extends State<IosInteractif> {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: [
-          const CupertinoSliverNavigationBar(
-            largeTitle: Text("Les interactifs"),
+          CupertinoSliverNavigationBar(
+            largeTitle: const Text("Les interactifs"),
+            trailing: CupertinoContextMenu(
+                actions: [
+                  CupertinoContextMenuAction(child: const Text("Système Red"),
+                    onPressed: (){
+                      setState(() {
+                        Navigator.pop(context);
+                        _circular = CupertinoColors.systemRed;
+                      });
+                    },),
+                  CupertinoContextMenuAction(child: const Text("Annuler"),
+                    isDestructiveAction: true,
+                    onPressed: (() => Navigator.pop(context)),
+                  ),
+
+                  CupertinoContextMenuAction(child: const Text("System Teal"),
+                    isDestructiveAction: false,
+                    onPressed: ((){
+                      Navigator.pop(context);
+                      setState(() {
+                        _circular = CupertinoColors.systemTeal;
+                      });
+                    }),
+                  ),
+                ],
+                child: CircleAvatar(
+                  backgroundColor: _circular,
+                )
+            ),
           ),
-          SliverFillRemaining(
-            child: Column(
+          SliverList.list(
+            children: [Column(
               children: [
                 Row(
                   children: [
@@ -175,9 +207,37 @@ class _InteractifState extends State<IosInteractif> {
                       });
                     }
                 ),
+
+                const SizedBox(height: 24,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("Activity indicator"),
+                    CupertinoActivityIndicator(animating: isAnimating,
+                      radius: 24,
+                      color: Colors.blue,),
+
+                    CupertinoButton(
+                      onPressed: (){
+                        setState(() {
+                          isAnimating = !isAnimating;
+                        });
+                      },
+                        child: Icon(isAnimating
+                        ? CupertinoIcons.stop_circle_fill
+                            : CupertinoIcons.play_circle_fill
+                        ))
+                  ],
+                ),
+                const SizedBox(height: 23,),
+
+
+                const SizedBox(height: 60,),
+
               ],
             ),
-          )
+    ],
+          ),
         ],
       ),
     );
