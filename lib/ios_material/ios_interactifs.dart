@@ -37,6 +37,12 @@ class _InteractifState extends State<IosInteractif> {
   bool isAnimating = false;
   Color _circular = CupertinoColors.systemTeal;
 
+  final List<String> _emojis = ["🐝", "🦄", "🧘‍♂️", "🐮", "💩", "🔱" ,"💍"];
+  int emojiIndex = 0;
+  EdgeInsets _insets = const EdgeInsets.all(24);
+
+  DateTime _dateTime = DateTime.now();
+
 
   //méthods for updates
   void _updateSlider(double newValue){
@@ -231,6 +237,49 @@ class _InteractifState extends State<IosInteractif> {
                 ),
                 const SizedBox(height: 23,),
 
+                Card(
+                  margin: const EdgeInsets.all(45),
+                  child: SizedBox(
+                    height: 150,
+                    child: CupertinoPicker(
+                      looping: true, //On arivera jamen à la fin
+                        itemExtent: 64,
+                        onSelectedItemChanged: (newIndex) {
+                          setState(() {
+                            emojiIndex = newIndex;
+                          });
+                        },
+                        children: _emojis.map((emoji) => Text(emoji, style: const TextStyle(fontSize: 54),)).toList()
+                    ),
+                  ),
+                ),
+
+                Padding(padding: _insets, 
+                child: Text("Emoji : ${_emojis[emojiIndex]}"),
+                ),
+
+                Padding(padding: _insets,),
+
+                SizedBox(
+                  height: 128,
+                  width: MediaQuery.of(context).size.width,
+                  child: CupertinoDatePicker(
+                    mode: CupertinoDatePickerMode.dateAndTime,
+                    initialDateTime: _dateTime ,
+                    use24hFormat: true,
+                      // showDayOfWeek: true,
+                      backgroundColor: CupertinoColors.darkBackgroundGray,
+                      onDateTimeChanged: (newDate){
+                      setState(() {
+                        _dateTime = newDate;
+                      });
+                      }
+                  ),
+                ),
+
+                Padding(padding: _insets,
+                  child: Text("Date : $_dateTime"),
+                ),
 
                 const SizedBox(height: 60,),
 
