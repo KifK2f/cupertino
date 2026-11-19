@@ -1,4 +1,5 @@
 import 'package:cupertino/ios_material/ios_interactifs.dart';
+import 'package:cupertino/ios_material/ios_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +76,14 @@ class _IOSPageScaffoldState extends State<IosPageScaffold> {
               CircleAvatar(
                 radius: 32,
                 backgroundColor: color,
-              )
+              ),
+              
+              CupertinoButton(child: const Text("Liste simple"), 
+                  onPressed: (){
+                final route = CupertinoPageRoute(builder: ((context) => const IosListPage()));
+                Navigator.push(context, route);
+                  }
+              ),
             ],
           )),
         ),
