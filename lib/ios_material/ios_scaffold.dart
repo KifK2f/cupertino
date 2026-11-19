@@ -1,5 +1,6 @@
 import 'package:cupertino/ios_material/ios_interactifs.dart';
 import 'package:cupertino/ios_material/ios_list_page.dart';
+import 'package:cupertino/ios_material/ios_section_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -84,6 +85,27 @@ class _IOSPageScaffoldState extends State<IosPageScaffold> {
                 Navigator.push(context, route);
                   }
               ),
+
+              CupertinoButton(child: const Text("Liste avec section"),
+                  onPressed: (){
+                final route = CupertinoPageRoute(builder: ((context) => const IosSectionPage()));
+                Navigator.push(context, route);
+                  }
+              ),
+
+              // CupertinoButton.filled(child: const Text("Alert"),
+              //     onPressed: (){
+              //   showCupertinoDialog(context, builder: (context) {
+              //     return CupertinoAlertDialog(
+              //       title: const,
+              //     )
+              //   });
+              //   Navigator.push(context, route);
+              //     }
+              // ),
+
+
+
             ],
           )),
         ),
