@@ -164,6 +164,17 @@ class _InteractifState extends State<IosInteractif> {
                   borderColor: CupertinoColors.darkBackgroundGray,
                   unselectedColor: CupertinoColors.systemMint,
                 ),
+                const SizedBox(height: 32,),
+                CupertinoSlidingSegmentedControl(
+                    children: _segments,
+                    groupValue: _currentSegment,
+                    thumbColor: CupertinoColors.link,
+                    onValueChanged: (s) {
+                      setState(() {
+                        _currentSegment = s ?? 0;
+                      });
+                    }
+                ),
               ],
             ),
           )
