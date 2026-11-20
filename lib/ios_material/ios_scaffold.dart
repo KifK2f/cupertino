@@ -1,3 +1,4 @@
+import 'package:cupertino/ios_material/ios_alert.dart';
 import 'package:cupertino/ios_material/ios_interactifs.dart';
 import 'package:cupertino/ios_material/ios_list_page.dart';
 import 'package:cupertino/ios_material/ios_section_page.dart';
@@ -93,16 +94,13 @@ class _IOSPageScaffoldState extends State<IosPageScaffold> {
                   }
               ),
 
-              // CupertinoButton.filled(child: const Text("Alert"),
-              //     onPressed: (){
-              //   showCupertinoDialog(context, builder: (context) {
-              //     return CupertinoAlertDialog(
-              //       title: const,
-              //     )
-              //   });
-              //   Navigator.push(context, route);
-              //     }
-              // ),
+              CupertinoButton.filled(
+                  child: const Text("Alert"),
+                  onPressed: (){
+                    final route = CupertinoPageRoute(builder: (context) => const IosAlertPage());
+                    Navigator.push(context, route);
+                  }
+              ),
 
 
 
